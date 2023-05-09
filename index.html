@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Registration Form</title>
+</head>
+
+<body>
+  <div class="container">
+    <form>
+      <fieldset>
+        <legend>Input data</legend>
+        <button id="autocomplete-toggle">Autocomplete</button>
+
+        <label for="first-name">First Name</label>
+        <input type="text" role="textbox" id="first-name" name="first-name" required aria-required="true">
+
+        <label for="last-name">Last Name</label>
+        <input type="text" role="textbox" id="last-name" name="last-name" required aria-required="true">
+
+        <label for="email">Email Address</label>
+        <input type="email" role="textbox" id="email" name="email" required aria-required="true">
+
+        <label for="password">Password</label>
+        <input type="password" role="textbox" id="password" name="password" required aria-required="true">
+
+        <label for="birthdate">Date of Birth</label>
+        <input type="date" role="datepicker" id="birthdate" name="birthdate" required aria-required="true">
+
+        <label for="phone">Phone Number</label>
+        <input type="number" role="textbox" id="phone" name="phone" required aria-required="true">
+
+        <label>Music Preferences</label>
+
+        <div class="preferences">
+          <input type="checkbox" role="checkbox" id="rock" name="music" value="rock" aria-required="false">
+          <label for="rock">Rock</label>
+          <input type="checkbox" id="pop" name="music" value="pop" aria-required="false">
+          <label for="pop">Pop</label>
+          <input type="checkbox" role="checkbox" id="jazz" name="music" value="jazz" aria-required="false">
+          <label for="jazz">Jazz</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Submit</legend>
+        <label>Accept terms and conditions
+        </label>
+        <br />
+        <div class="preferences">
+          <input type="radio" role="radiogroup" id="yes" class="accepting" name="terms" value="yes" />
+          <label for="yes">Yes</label>
+          <input type="radio" role="radiogroup" id="no" name="terms" value="no" />
+          <label for="no">No</label>
+          <br />
+        </div>
+        <button type="button" id="clear-form">Clear Form</button>
+        <button id="submit-btn" type="submit" role="button">Submit
+          registration</button>
+      </fieldset>
+    </form>
+
+    <script>
+      var autocomplete = "on";
+      var autocompleteToggle = document.getElementById("autocomplete-toggle");
+      autocompleteToggle.addEventListener("click", function () {
+        if (autocomplete === "on") {
+          autocomplete = "off";
+        } else {
+          autocomplete = "on";
+        }
+        var formInputs = document.getElementsByTagName("input");
+        for (var i = 0; i < formInputs.length; i++) {
+          formInputs[i].autocomplete = autocomplete;
+        }
+      });
+
+      const submitBtn = document.getElementById("submit-btn");
+      submitBtn.addEventListener("click", function (event) {
+        const firstNameInput = document.getElementById("first-name");
+        const firstName = firstNameInput.value.trim();
+        const lastNameInput = document.getElementById("last-name");
+        const lastName = lastNameInput.value.trim();
+        const emailInput = document.getElementById("email");
+        const email = emailInput.value.trim();
+        const passwordInput = document.getElementById("password");
+        const password = passwordInput.value.trim();
+        const dateOfBirthInput = document.getElementById("birthdate");
+        const dateOfBirth = dateOfBirthInput.value.trim();
+        const birthdateInput = document.getElementById("birthdate");
+        const birthdate = birthdateInput.value.trim();
+        const phoneNumberInput = document.getElementById("phone");
+        const phoneNumber = phoneNumberInput.value.trim();
+        const acceptingRadio = document.querySelector(".accepting");
+
+        if (firstName === "") {
+          event.preventDefault();
+          alert("Please enter your first name before submitting the form.");
+        } else if (lastName === "") {
+          event.preventDefault();
+          alert("Please enter your last name before submitting the form.");
+        } else if (email === "") {
+          event.preventDefault();
+          alert("Please enter a valid email address before submitting the form.");
+        } else if (password === "") {
+          event.preventDefault();
+          alert("Please enter a password before submitting the form.");
+        } else if (dateOfBirth === "") {
+          event.preventDefault();
+          alert("Please enter your date of birth before submitting the form.");
+        } else if (phoneNumber === "") {
+          event.preventDefault();
+          alert("Please enter a valid phone number before submitting the form.");
+        } else if (acceptingRadio && !acceptingRadio.checked) {
+          event.preventDefault();
+          alert("Please accept the terms and conditions before submitting the form.");
+        } else {
+          alert("Registration submitted!");
+        }
+      });
+
+      const clearFormButton = document.getElementById("clear-form");
+      clearFormButton.addEventListener("click", function () {
+        const form = document.getElementsByTagName("form")[0];
+        form.reset();
+      });
+    </script>
+
+</body>
+
+</html>
